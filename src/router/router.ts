@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MainComponent from '../components/MainComponent.vue'
 import ListSuppliersComponent from '../components/ListSuppliersComponent.vue'
+import ErrorComponentVue from '../components/ErrorComponent.vue';
 
 const routes = [
   {
@@ -12,8 +13,12 @@ const routes = [
     path: '/listSuppliersComponent',
     name: 'ListSuppliersComponent',
     component: ListSuppliersComponent
-  },  
-  // Añade aquí más rutas según sea necesario
+  },
+  {
+    path: '/error',
+    name: 'Error',
+    component: ErrorComponentVue
+  }
 ];
 
 const router = createRouter({

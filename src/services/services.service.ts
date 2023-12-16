@@ -9,8 +9,8 @@ const apiClient = axios.create({
   }
 });
 
-// Guardar el token en localStorage
-localStorage.setItem('token', token);
+// Guardar el token en sessionStorage
+sessionStorage.setItem('token', token);
 
 export const loadBalance = () => {
   return apiClient.get('/getActualBalance');

@@ -43,7 +43,7 @@
       };
     },
     created() {
-      this.token = localStorage.getItem('token');
+      this.token = sessionStorage.getItem('token');
       this.verifyToken();
     },
 
@@ -52,7 +52,7 @@
         if (!this.token) {
           this.error = 'No autorizado (401)';
           this.isLoading = false;
-          console.log('mostrar error 404', this.token);
+          this.$router.push('/error');
         } else {
           this.obtenerListaProveedores();
         }

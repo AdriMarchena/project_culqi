@@ -38,7 +38,7 @@
             };
         },
         created() {
-            this.token = localStorage.getItem('token');
+            this.token = sessionStorage.getItem('token');
             this.verifyToken();
         },
         methods: {
@@ -46,7 +46,7 @@
                 if (!this.token) {
                     this.error = 'No autorizado (401)';
                     this.isLoading = false;
-                    console.log('mostrar error 404', this.token);
+                    this.$router.push('/error');
                 } else {
                     this.obtenerDatosSaldo();
                 }
@@ -59,14 +59,14 @@
                 })
                 .catch(error => {
                     if (error.response && error.response.status === 401) {
-                    this.error = 'Error 401: No autorizado.';
-                    console.log('error', this.error);
-                    this.isLoading = false;
+                        this.error = 'Error 401: No autorizado.';
+                        console.log('error', this.error);
+                        this.isLoading = false;
                     } else {
-                    // Manejar otros tipos de errores
-                    this.error = 'Error al cargar el saldo.';
-                    console.log('error', this.error);
-                    this.isLoading = false;
+                        // Manejar otros tipos de errores
+                        this.error = 'Error al cargar el saldo.';
+                        console.log('error', this.error);
+                        this.isLoading = false;
                     }
                 });
             }
