@@ -19,11 +19,11 @@
   export default {
     data() {
       return {
-        activeButton: 'todas'
+        activeButton: 'todas' as string
       };
     },
     methods: {
-      setActive(button) {
+      setActive(button: string): void {
         this.activeButton = button;
       }
     }

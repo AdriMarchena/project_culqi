@@ -25,6 +25,7 @@
             performSearch() {
                 // Lógica para realizar la búsqueda
                 console.log('Buscando:', this.searchTerm);
+                this.$emit('sendData', this.searchTerm);
             }
         }
     };

@@ -31,14 +31,14 @@
         name: 'MainComponent',
         data() {
             return {
-                token: null,
-                isLoading: true,
-                error: null,
-                balance: null
+                token: '' as string,
+                isLoading: true as boolean,
+                error: '' as string,
+                balance: '' as string
             };
         },
         created() {
-            this.token = sessionStorage.getItem('token');
+            this.token = sessionStorage.getItem('token') || '';
             this.verifyToken();
         },
         methods: {

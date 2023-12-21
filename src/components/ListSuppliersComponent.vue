@@ -2,7 +2,7 @@
   <loading-spinner v-if="isLoading"></loading-spinner>
   <div class="container" v-if="!isLoading">
     <header-component header="Recargas"></header-component>
-    <search-component></search-component><br>
+    <search-component @sendData="getData"></search-component><br>
     <filters-component></filters-component><br>
     <div class="provider-list">
       <div v-for="provider in providers" :key="provider._id" class="provider-card">
@@ -20,7 +20,7 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
   import { getSuppliers } from '../services/services.service';
-  import Supplier from '../interfaces/supplier.interface';
+  import { Supplier } from '../interfaces/supplier.interface';
   import LoadingSpinner from './LoadingSpinner.vue';
   import SearchComponent from './SearchComponent.vue';
   import FiltersComponent from './FiltersComponent.vue';
@@ -36,14 +36,14 @@
     name: 'ListSuppliersComponent',
     data() {
       return {
-        token: null,
-        isLoading: true,
-        error: null,
+        token: '' as string,
+        isLoading: true as boolean,
+        error: '' as string,
         providers: [] as Supplier[]
       };
     },
     created() {
-      this.token = sessionStorage.getItem('token');
+      this.token = sessionStorage.getItem('token') || '';
       this.verifyToken();
     },
 
@@ -77,6 +77,13 @@
               this.isLoading = false;
             }
           });
+      },
+      getData(value: string) {
+        console.log('Evento recibido con:', value);
+        this.providers.filter(provider => 
+          provider.company.includes(value)
+        );
+        console.log('conjunto', this.providers);
       }
     }
   });

@@ -1,5 +1,5 @@
 export interface Supplier {
-    _id: String,
-    company: String,
-    image: String
+    _id: string,
+    company: string,
+    image: string
 }
