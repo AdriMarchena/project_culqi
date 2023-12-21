@@ -4,7 +4,11 @@
         <header-component header="Recargas y pagos"></header-component>
         <div class="balance">
             <div class="balance-info">         
-                <balance-component :balance="balance"></balance-component>
+                <balance-component 
+                    :balance="balance" 
+                    @reloadBalance="getBalanceData"
+                    :isLoading="isLoadingBalance">
+                </balance-component>
                 <information-component rechargeCode="1234567890"></information-component>
             </div>
             <option-list-component></option-list-component>
@@ -33,6 +37,7 @@
             return {
                 token: '' as string,
                 isLoading: true as boolean,
+                isLoadingBalance: true as boolean,
                 error: '' as string,
                 balance: '' as string
             };
@@ -48,14 +53,16 @@
                     this.isLoading = false;
                     this.$router.push('/error');
                 } else {
-                    this.obtenerDatosSaldo();
+                    this.getBalanceData();
                 }
             },
-            obtenerDatosSaldo() {
+            getBalanceData() {
+                this.isLoadingBalance = true;
                 loadBalance()
                 .then(response => {
                     this.balance = response.data.data.balanceCommerce;
                     this.isLoading = false;
+                    this.isLoadingBalance = false;
                 })
                 .catch(error => {
                     if (error.response && error.response.status === 401) {

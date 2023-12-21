@@ -54,10 +54,10 @@
           this.isLoading = false;
           this.$router.push('/error');
         } else {
-          this.obtenerListaProveedores();
+          this.getSupplierList();
         }
       },
-      obtenerListaProveedores() {
+      getSupplierList() {
         getSuppliers()
           .then(response => {
             this.providers = response.data.data.companies;

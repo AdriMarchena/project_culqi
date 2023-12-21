@@ -4,16 +4,29 @@
       <i class="fas fa-info-circle info-icon"></i>
   </div>
   <div class="balance-amount-with-icon">
-      <h2 class="amount">S/ {{ balance }}</h2>
-      <i class="fas fa-sync reload-icon"></i>
+      <div class="loading" v-if="isLoading">
+        <loading-spinner class="spinner"></loading-spinner>
+      </div>
+      <h2 class="amount" v-if="!isLoading">S/ {{ balance }}</h2>
+      <i class="fas fa-sync reload-icon" @click="reloadBalance"></i>
   </div>
 </template>
 
 <script lang="ts">
+  import LoadingSpinner from './LoadingSpinner.vue';
   export default {
-      props: {
-        balance: String
-      },
+    components: {
+      LoadingSpinner,
+    },
+    props: {
+      balance: String,
+      isLoading: Boolean
+    },
+    methods: {
+      reloadBalance() {
+        this.$emit('reloadBalance');
+      }
+    }
   }
 </script>
 
@@ -52,5 +65,18 @@
     font-size: 20px;
     color: #00A7A7;
     transform: scaleX(0.85);
+    cursor: pointer;
+  }
+
+  .loading {
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .spinner {
+    width: 25px;
+    height: 25px;
   }
 </style>
