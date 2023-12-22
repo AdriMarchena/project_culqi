@@ -5,7 +5,7 @@
     <search-component @sendData="getData"></search-component><br>
     <filters-component></filters-component><br>
     <div class="provider-list">
-      <div v-for="provider in providers" :key="provider._id" class="provider-card">
+      <div v-for="provider in filteredProviders" :key="provider._id" class="provider-card">
         <div class="provider-icon">
           <img :src="provider.image">
         </div>
@@ -39,7 +39,8 @@
         token: '' as string,
         isLoading: true as boolean,
         error: '' as string,
-        providers: [] as Supplier[]
+        providers: [] as Supplier[],
+        filteredProviders: [] as Supplier[]
       };
     },
     created() {
@@ -62,6 +63,7 @@
           .then(response => {
             this.providers = response.data.data.companies;
             this.providers.splice(8, 2);
+            this.filteredProviders = this.providers;
             this.isLoading = false;
 
           })
@@ -79,11 +81,9 @@
           });
       },
       getData(value: string) {
-        console.log('Evento recibido con:', value);
-        this.providers.filter(provider => 
-          provider.company.includes(value)
-        );
-        console.log('conjunto', this.providers);
+        this.filteredProviders = this.providers.filter(provider => {
+          return provider.company.toLowerCase().includes(value.toLowerCase());
+        });
       }
     }
   });
