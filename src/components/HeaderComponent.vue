@@ -1,7 +1,7 @@
 <template>
     <header class="header">
         <div class="div-header">
-            <i class="fas fa-arrow-left icon-header"></i>
+            <i class="fas fa-arrow-left icon-header" @click="goBack"></i>
             <span class="span-header">{{ header }}</span>
         </div>
     </header>
@@ -13,6 +13,11 @@
         props: {
             header: String
         },
+        methods: {
+            goBack() {
+                this.$router.go(-1);
+            }
+        }
     }
 </script>
 
@@ -31,6 +36,7 @@
     .icon-header {
         width: 15%;
         margin-top: 7px;
+        cursor: pointer;
     }
   
     .span-header {
