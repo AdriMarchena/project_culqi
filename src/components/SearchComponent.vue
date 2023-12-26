@@ -4,6 +4,7 @@
       <input
         v-model="searchTerm"
         @keyup.enter="performSearch"
+        @input="performSearch"
         placeholder="ej. Culqi"
         type="text"
         class="search-input"
@@ -23,8 +24,6 @@
         },
         methods: {
             performSearch() {
-                // Lógica para realizar la búsqueda
-                console.log('Buscando:', this.searchTerm);
                 this.$emit('sendData', this.searchTerm);
             }
         }

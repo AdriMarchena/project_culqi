@@ -93,6 +93,21 @@
   .container {
     font-family: 'Arial', sans-serif;
   }
+
+  .provider-list {
+    max-height: 450px;
+    overflow-y: auto;
+  }
+
+  .provider-list::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .provider-list::-webkit-scrollbar-thumb {
+    background: #ff9500; /* Color del scrollbar */
+    border-radius: 10px; /* Bordes redondeados */
+  }
+
   .provider-card {
     display: flex;
     align-items: center;
